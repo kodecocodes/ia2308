@@ -30,13 +30,24 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-enum Constants {
-  enum General {
-    public static let color = CGFloat(0)
-    public static let cornerRadius = CGFloat(21)
-    public static let colorRGB = CGFloat(0/255)
-    public static let padding = CGFloat(20)
+struct RoundedRectView: View {
+  var body: some View {
+    RoundedRectangle(cornerRadius: 0)
+      .foregroundColor(.black)
+      .border(Color("BorderColor"), width: 10)
+      .background(Color("BackgroundColor"))
+      .ignoresSafeArea()
+      .padding(Constants.General.padding)
+  }
+}
+
+struct RoundedRectView_Previews: PreviewProvider {
+  static var previews: some View {
+    RoundedRectView()
+    RoundedRectView()
+      .preferredColorScheme(.light)
+      .previewInterfaceOrientation(.landscapeRight)
   }
 }

@@ -30,13 +30,52 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-enum Constants {
-  enum General {
-    public static let color = CGFloat(0)
-    public static let cornerRadius = CGFloat(21)
-    public static let colorRGB = CGFloat(0/255)
-    public static let padding = CGFloat(20)
+struct TitleText: View {
+  var text: String
+  
+  var body: some View {
+    Text(text)
+      .font(.largeTitle)
+      .bold()
+  }
+}
+
+struct SliderText: View {
+  var text: String
+  
+  var body: some View {
+    Text(text)
+  }
+}
+
+struct ButtonText: View {
+  var text: String
+  
+  var body: some View {
+    Text(text)
+      .padding(Constants.General.padding)
+      .background(
+        ZStack {
+          Color("ButtonColor")
+        }
+      )
+      .overlay(
+        RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
+          .strokeBorder(Color.white, lineWidth: 3)
+      )
+      .cornerRadius(Constants.General.cornerRadius)
+      .foregroundColor(.white)
+  }
+}
+
+struct TextViews_Previews: PreviewProvider {
+  static var previews: some View {
+    VStack {
+      TitleText(text: "Title")
+      SliderText(text: "SliderText")
+      ButtonText(text: "ButtonText")
+    }
   }
 }
