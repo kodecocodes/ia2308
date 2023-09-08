@@ -44,14 +44,16 @@ struct ContentView: View {
     VStack {
       Text("Color Picker")
         .font(.largeTitle)
+        .bold()
 
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
-        .border(.black)
+        .border(.orange, width: 5)
       VStack {
         Text("Red")
         HStack {
           Slider(value: $redColor, in: 0...255)
+            .accentColor(.red)
           Text("\(Int(redColor.rounded()))")
         }
       }
@@ -59,6 +61,7 @@ struct ContentView: View {
         Text("Green")
         HStack {
           Slider(value: $greenColor, in: 0...255)
+            .accentColor(.green)
           Text("\(Int(greenColor.rounded()))")
         }
       }
@@ -66,6 +69,7 @@ struct ContentView: View {
         Text("Blue")
         HStack {
           Slider(value: $blueColor, in: 0...255)
+            .accentColor(.blue)
           Text("\(Int(blueColor.rounded()))")
         }
       }
