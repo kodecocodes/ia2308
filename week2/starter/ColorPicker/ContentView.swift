@@ -34,20 +34,19 @@ import SwiftUI
 
 struct ContentView: View {
   @State private var alertIsVisible: Bool = false
-  @State private var redColor: Double = 0.0
-  @State private var greenColor: Double = 0.0
-  @State private var blueColor: Double = 0.0
-  @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
+  @State private var redColor: Double = Constants.General.color
+  @State private var greenColor: Double = Constants.General.color
+  @State private var blueColor: Double = Constants.General.color
+  @State private var foregroundColor = Color(red: Constants.General.color, green: Constants.General.color, blue: Constants.General.color)
+  @Environment(\.verticalSizeClass) var verticalSizeClass
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
   var body: some View {
-    @Environment(\.verticalSizeClass) var verticalSizeClass
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     VStack {
       Text("Color Picker")
         .font(.largeTitle)
         .bold()
-      
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
         .border(Color("BorderColor"), width: 10)
@@ -76,7 +75,7 @@ struct ContentView: View {
         }
       }
       Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
+        foregroundColor = Color(red: Constants.General.colorRGB, green: Constants.General.colorRGB, blue: Constants.General.colorRGB)
       }
       .padding(20)
       .background(
@@ -85,10 +84,10 @@ struct ContentView: View {
         }
       )
       .overlay(
-        RoundedRectangle(cornerRadius: 21)
-          .strokeBorder(Color.white, lineWidth: 2.0)
+        RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
+          .strokeBorder(Color.white, lineWidth: 3)
       )
-      .cornerRadius(21)
+      .cornerRadius(Constants.General.cornerRadius)
       .foregroundColor(.white)
     }
     .background(Color("BackgroundColor"))

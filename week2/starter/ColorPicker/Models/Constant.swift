@@ -30,16 +30,13 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct BackgroundColor: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct BackgroundColor_Previews: PreviewProvider {
-    static var previews: some View {
-        BackgroundColor()
-    }
+enum Constants {
+  enum General {
+    public static let color = CGFloat(0)
+    public static let cornerRadius = CGFloat(21)
+    public static let colorRGB = CGFloat(0/255)
+    
+  }
 }
