@@ -40,6 +40,8 @@ struct ContentView: View {
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
   
   var body: some View {
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     VStack {
       Text("Color Picker")
@@ -48,7 +50,7 @@ struct ContentView: View {
       
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
-        .border(.orange, width: 5)
+        .border(Color("BorderColor"), width: 10)
       VStack {
         Text("Red")
         HStack {
@@ -89,9 +91,10 @@ struct ContentView: View {
       .cornerRadius(21)
       .foregroundColor(.white)
     }
-    .background(Color.white)
+    .background(Color("BackgroundColor"))
+    .ignoresSafeArea()
     .padding(20)
-
+    
   }
 }
 
@@ -99,6 +102,7 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
     ContentView()
+      .previewInterfaceOrientation(.landscapeRight)
       .preferredColorScheme(.dark)
   }
 }
