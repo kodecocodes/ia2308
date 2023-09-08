@@ -38,14 +38,14 @@ struct ContentView: View {
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  
   var body: some View {
-
+    
     VStack {
       Text("Color Picker")
         .font(.largeTitle)
         .bold()
-
+      
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
         .border(.orange, width: 5)
@@ -76,6 +76,18 @@ struct ContentView: View {
       Button("Set Color") {
         foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
       }
+      .padding(20)
+      .background(
+        ZStack {
+          Color("ButtonColor")
+        }
+      )
+      .overlay(
+        RoundedRectangle(cornerRadius: 21)
+          .strokeBorder(Color.white, lineWidth: 2.0)
+      )
+      .cornerRadius(21)
+      .foregroundColor(.white)
     }
     .background(Color.white)
     .padding(20)
@@ -86,5 +98,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+    ContentView()
+      .preferredColorScheme(.dark)
   }
 }
