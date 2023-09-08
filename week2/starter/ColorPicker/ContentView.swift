@@ -54,7 +54,7 @@ struct ContentView: View {
         HStack {
           Slider(value: $redColor, in: 0...255)
             .accentColor(.red)
-            .frame(maxWidth: 350)
+            .frame(maxWidth: Constants.General.sliderValueWidth)
           Text("\(Int(redColor.rounded()))")
             .frame(maxWidth: Constants.General.sliderNumberWidth)
         }
@@ -64,7 +64,7 @@ struct ContentView: View {
         HStack {
           Slider(value: $greenColor, in: 0...255)
             .accentColor(.green)
-            .frame(maxWidth: 350)
+            .frame(maxWidth: Constants.General.sliderValueWidth)
           Text("\(Int(greenColor.rounded()))")
             .frame(maxWidth: Constants.General.sliderNumberWidth)
         }
@@ -74,7 +74,7 @@ struct ContentView: View {
         HStack {
           Slider(value: $blueColor, in: 0...255)
             .accentColor(.blue)
-            .frame(maxWidth: 350)
+            .frame(maxWidth: Constants.General.sliderValueWidth)
           Text("\(Int(blueColor.rounded()))")
             .frame(maxWidth: Constants.General.sliderNumberWidth)
         }
