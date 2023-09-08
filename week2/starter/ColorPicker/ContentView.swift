@@ -32,55 +32,187 @@
 
 import SwiftUI
 
+struct TitleTextView: View {
+  var text: String
+  var body: some View{
+    Text(text)
+      .font(.largeTitle).bold()
+  }
+}
+
+struct RectangleView: View{
+  var height: CGFloat
+  var width: CGFloat
+  var frameWidth: CGFloat
+  var borderColor: Color
+  @Binding var foregroundColor: Color
+  
+  var body: some View{
+    RoundedRectangle(cornerRadius: 0)
+      .frame(width: width, height: height)
+      .foregroundColor(foregroundColor)
+      .border(borderColor,width: frameWidth)
+  }
+}
+
+struct SliderView: View{
+  var title: String
+  var accentColor: Color
+  @Binding var colorValue: Double
+  
+  var body: some View{
+    VStack {
+      Text(title)
+      HStack {
+        Slider(value: $colorValue, in: 0...DrawingConstants.colorRangeValue)
+          .accentColor(accentColor)
+        Text("\(Int(DrawingConstants.colorRangeValue))")
+      }
+    }
+  }
+}
+
+struct SetColorButton: View{
+  var text: String
+  @Binding var foregroundColor: Color
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  
+  var body: some View{
+    Button(text){
+      foregroundColor = Color(red: redColor / DrawingConstants.colorRangeValue, green: greenColor / DrawingConstants.colorRangeValue, blue: blueColor / DrawingConstants.colorRangeValue)
+    }
+    .buttonStyle(.borderedProminent)
+    .tint(.blue)
+  }
+}
+
+enum DrawingConstants {
+  static let frameWidth = 10.0
+  static let colorRangeValue: Double = 255.0
+  static let outerGroupPadding = 20.0
+  static let landscapeModeRecatngleScale = 0.8
+  
+}
+
 struct ContentView: View {
-  @State private var alertIsVisible: Bool = false
+  
+  @Environment (\.verticalSizeClass) var verticalSizeClass
+  var isLandScape: Bool {
+    verticalSizeClass == .compact
+  }
+  
   @State private var redColor: Double = 0.0
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  
+  var titleText = "Color Picker"
+  
+  private var borderColor : Color {
+    let uiColor = UIColor(foregroundColor).lighter()
+    return Color(uiColor)
+  }
+  
   var body: some View {
 
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(.black)
-      VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-          Text("\(Int(redColor.rounded()))")
+    Group {
+      ZStack {
+        GeometryReader { geometry in
+          Color("BackgroundColor")
+            .ignoresSafeArea()
+          if isLandScape{
+            
+            VStack {
+              TitleTextView(text: titleText)
+              HStack{
+                RectangleView(height : geometry.size.height * DrawingConstants.landscapeModeRecatngleScale, width: geometry.size.height * DrawingConstants.landscapeModeRecatngleScale, frameWidth: DrawingConstants.frameWidth, borderColor: borderColor, foregroundColor: $foregroundColor)
+                VStack {
+                  SliderView(title: "Red", accentColor: .red, colorValue: $redColor)
+                  SliderView(title: "Green", accentColor: .green, colorValue: $greenColor)
+                  SliderView(title: "Blue", accentColor: .blue, colorValue: $blueColor)
+                  SetColorButton(text: "Set Color", foregroundColor: $foregroundColor, redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
+                }
+              }
+              
+            }
+          }else{
+            
+            VStack {
+              
+              TitleTextView(text: titleText)
+              
+              RectangleView(height : geometry.size.width, width: geometry.size.width, frameWidth: DrawingConstants.frameWidth, borderColor: borderColor, foregroundColor: $foregroundColor)
+              
+              
+              SliderView(title: "Red", accentColor: .red, colorValue: $redColor)
+              SliderView(title: "Green", accentColor: .green, colorValue: $greenColor)
+              SliderView(title: "Blue", accentColor: .blue, colorValue: $blueColor)
+              
+              SetColorButton(text: "Set Color", foregroundColor: $foregroundColor, redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
+              
+            }
+          }
         }
-      }
-      VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-          Text("\(Int(greenColor.rounded()))")
-        }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-          Text("\(Int(blueColor.rounded()))")
-        }
-      }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
       }
     }
-    .background(Color.white)
-    .padding(20)
-
+    .padding(DrawingConstants.outerGroupPadding)
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+  }
+}
+
+
+// Lighter and Darker Color in SwiftUI components I got from here:
+// https://www.advancedswift.com/lighter-and-darker-uicolor-swift/
+
+extension UIColor {
+  private func makeColor(componentDelta: CGFloat) -> UIColor {
+    var red: CGFloat = 0
+    var blue: CGFloat = 0
+    var green: CGFloat = 0
+    var alpha: CGFloat = 0
+    
+    // Extract r,g,b,a components from the
+    // current UIColor
+    getRed(
+      &red,
+      green: &green,
+      blue: &blue,
+      alpha: &alpha
+    )
+    
+    // Create a new UIColor modifying each component
+    // by componentDelta, making the new UIColor either
+    // lighter or darker.
+    return UIColor(
+      red: add(componentDelta, toComponent: red),
+      green: add(componentDelta, toComponent: green),
+      blue: add(componentDelta, toComponent: blue),
+      alpha: alpha
+    )
+  }
+}
+
+extension UIColor {
+  // Add value to component ensuring the result is
+  // between 0 and 1
+  private func add(_ value: CGFloat, toComponent: CGFloat) -> CGFloat {
+    return max(0, min(1, toComponent + value))
+  }
+}
+
+extension UIColor {
+  func lighter(componentDelta: CGFloat = 0.1) -> UIColor {
+    return makeColor(componentDelta: componentDelta)
+  }
+  
+  func darker(componentDelta: CGFloat = 0.1) -> UIColor {
+    return makeColor(componentDelta: -1*componentDelta)
   }
 }
