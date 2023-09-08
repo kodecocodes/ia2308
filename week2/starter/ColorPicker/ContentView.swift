@@ -34,9 +34,9 @@ import SwiftUI
 
 struct ContentView: View {
   @State private var alertIsVisible: Bool = false
-  @State private var redColor: Double = Constants.General.color
-  @State private var greenColor: Double = Constants.General.color
-  @State private var blueColor: Double = Constants.General.color
+  @State private var redColor = Constants.General.color
+  @State private var greenColor = Constants.General.color
+  @State private var blueColor = Constants.General.color
   @State private var foregroundColor = Color(red: Constants.General.color, green: Constants.General.color, blue: Constants.General.color)
   @Environment(\.verticalSizeClass) var verticalSizeClass
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -48,12 +48,15 @@ struct ContentView: View {
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
         .border(Color("BorderColor"), width: 10)
+        .frame(width: 350, height: 350)
       VStack {
         SliderText(text: "Red")
         HStack {
           Slider(value: $redColor, in: 0...255)
             .accentColor(.red)
+            .frame(maxWidth: 350)
           Text("\(Int(redColor.rounded()))")
+            .frame(maxWidth: Constants.General.sliderNumberWidth)
         }
       }
       VStack {
@@ -61,7 +64,9 @@ struct ContentView: View {
         HStack {
           Slider(value: $greenColor, in: 0...255)
             .accentColor(.green)
+            .frame(maxWidth: 350)
           Text("\(Int(greenColor.rounded()))")
+            .frame(maxWidth: Constants.General.sliderNumberWidth)
         }
       }
       VStack {
@@ -69,11 +74,13 @@ struct ContentView: View {
         HStack {
           Slider(value: $blueColor, in: 0...255)
             .accentColor(.blue)
+            .frame(maxWidth: 350)
           Text("\(Int(blueColor.rounded()))")
+            .frame(maxWidth: Constants.General.sliderNumberWidth)
         }
       }
       Button("Set Color") {
-        foregroundColor = Color(red: Constants.General.colorRGB, green: Constants.General.colorRGB, blue: Constants.General.colorRGB)
+        foregroundColor = Color(red: redColor / Constants.General.colorRGB, green: greenColor / Constants.General.colorRGB, blue: blueColor / Constants.General.colorRGB)
       }
       .padding(Constants.General.padding)
       .background(
@@ -88,7 +95,6 @@ struct ContentView: View {
       .cornerRadius(Constants.General.cornerRadius)
       .foregroundColor(.white)
     }
-    .background(Color("BackgroundColor"))
     .ignoresSafeArea()
     .padding(Constants.General.padding)
     
@@ -96,6 +102,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+
   static var previews: some View {
     ContentView()
     ContentView()

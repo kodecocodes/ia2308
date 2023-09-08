@@ -38,6 +38,7 @@ struct RoundedRectView: View {
       .foregroundColor(.black)
       .border(Color("BorderColor"), width: 10)
       .background(Color("BackgroundColor"))
+      .frame(width: 350, height: 350)
       .ignoresSafeArea()
       .padding(Constants.General.padding)
   }

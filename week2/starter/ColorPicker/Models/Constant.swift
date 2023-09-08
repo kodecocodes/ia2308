@@ -36,7 +36,8 @@ enum Constants {
   enum General {
     public static let color = CGFloat(0)
     public static let cornerRadius = CGFloat(21)
-    public static let colorRGB = CGFloat(0/255)
+    public static let colorRGB = CGFloat(255)
     public static let padding = CGFloat(20)
+    public static let sliderNumberWidth = CGFloat(35)
   }
 }
