@@ -40,6 +40,7 @@ struct ContentView: View {
   @State private var foregroundColor = Color(red: Constants.General.color, green: Constants.General.color, blue: Constants.General.color)
   @Environment(\.verticalSizeClass) var verticalSizeClass
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  @Environment(\.colorScheme) var colorScheme
   
   var isLandscape: Bool {
     verticalSizeClass == .regular && horizontalSizeClass == .compact
@@ -88,7 +89,7 @@ struct ContentView: View {
           Button("Set Color") {
             foregroundColor = Color(red: redColor / Constants.General.colorRGB, green: greenColor / Constants.General.colorRGB, blue: blueColor / Constants.General.colorRGB)
           }
-          .padding(Constants.General.padding)
+          .padding(Constants.General.paddingConstant)
           .background(
             ZStack {
               Color("ButtonColor")
@@ -102,7 +103,7 @@ struct ContentView: View {
           .foregroundColor(.white)
         }
         .ignoresSafeArea()
-        .padding(Constants.General.padding)
+        .padding(Constants.General.paddingConstant)
       }
     } else {
       HStack {
@@ -146,7 +147,7 @@ struct ContentView: View {
             Button("Set Color") {
               foregroundColor = Color(red: redColor / Constants.General.colorRGB, green: greenColor / Constants.General.colorRGB, blue: blueColor / Constants.General.colorRGB)
             }
-            .padding(Constants.General.padding)
+            .padding(Constants.General.paddingConstant)
             .background(
               ZStack {
                 Color("ButtonColor")
@@ -161,7 +162,7 @@ struct ContentView: View {
           }
         }
         .ignoresSafeArea()
-        .padding(Constants.General.padding)
+        .padding(Constants.General.paddingConstant)
       }
     }
   }

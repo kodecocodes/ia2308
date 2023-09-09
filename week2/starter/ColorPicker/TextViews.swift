@@ -64,7 +64,7 @@ struct ButtonText: View {
   
   var body: some View {
     Text(text)
-      .padding(Constants.General.padding)
+      .padding(Constants.General.paddingConstant)
       .background(
         ZStack {
           Color("ButtonColor")
