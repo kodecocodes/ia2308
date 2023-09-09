@@ -32,12 +32,36 @@
 
 import SwiftUI
 
-@main
-struct AppMain: App {
-  var body: some Scene {
-    WindowGroup {
-      ContentView()
+struct Landscape: View {
+  
+  @Environment(\.verticalSizeClass) var verticalSizeClass
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  
+  var isLandscape: Bool {
+    verticalSizeClass == .regular && horizontalSizeClass == .compact
+  }
+    var body: some View {
+      if isLandscape {
+        VStack {
+          Circle()
+            .fill(Color.red)
+          Circle()
+            .fill(Color.green)
+        }
+      } else {
+          HStack {
+            Circle()
+              .fill(Color.red)
+            Circle()
+              .fill(Color.green)
+        }
+      }
+    }
+}
+
+struct Landscape_Previews: PreviewProvider {
+    static var previews: some View {
+        Landscape()
     
     }
-  }
 }

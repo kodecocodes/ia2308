@@ -15,6 +15,7 @@
 		794E8EFA2AAB92340016085A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794E8EF92AAB92340016085A /* Constant.swift */; };
 		794E8EFC2AAB9ACF0016085A /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794E8EFB2AAB9ACF0016085A /* TextViews.swift */; };
 		79675D0E2AABA02500D089C5 /* RoundedRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79675D0D2AABA02500D089C5 /* RoundedRectView.swift */; };
+		79E33FE32AACEEAA0056B17A /* Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E33FE22AACEEAA0056B17A /* Landscape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		794E8EF92AAB92340016085A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		794E8EFB2AAB9ACF0016085A /* TextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
 		79675D0D2AABA02500D089C5 /* RoundedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectView.swift; sourceTree = "<group>"; };
+		79E33FE22AACEEAA0056B17A /* Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landscape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
+				79E33FE22AACEEAA0056B17A /* Landscape.swift */,
 				79675D0D2AABA02500D089C5 /* RoundedRectView.swift */,
 				794E8EFB2AAB9ACF0016085A /* TextViews.swift */,
 				794E8EF82AAB921E0016085A /* Models */,
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
+				79E33FE32AACEEAA0056B17A /* Landscape.swift in Sources */,
 				794E8EFC2AAB9ACF0016085A /* TextViews.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 				794E8EFA2AAB92340016085A /* Constant.swift in Sources */,

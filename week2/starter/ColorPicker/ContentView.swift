@@ -41,72 +41,144 @@ struct ContentView: View {
   @Environment(\.verticalSizeClass) var verticalSizeClass
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
+  var isLandscape: Bool {
+    verticalSizeClass == .regular && horizontalSizeClass == .compact
+  }
+  
   var body: some View {
     
-    VStack {
-      TitleText(text: "Color Picker")
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(Color("BorderColor"), width: 10)
-        .frame(width: 350, height: 350)
+    if isLandscape {
       VStack {
-        SliderText(text: "Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-            .accentColor(.red)
-            .frame(maxWidth: Constants.General.sliderValueWidth)
-          Text("\(Int(redColor.rounded()))")
-            .frame(maxWidth: Constants.General.sliderNumberWidth)
+        VStack {
+          TitleText(text: "Color Picker")
+          RoundedRectangle(cornerRadius: 0)
+            .foregroundColor(foregroundColor)
+            .border(Color("BorderColor"), width: 10)
+            .frame(width: 350, height: 350)
         }
-      }
-      VStack {
-        SliderText(text: "Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-            .accentColor(.green)
-            .frame(maxWidth: Constants.General.sliderValueWidth)
-          Text("\(Int(greenColor.rounded()))")
-            .frame(maxWidth: Constants.General.sliderNumberWidth)
+        VStack {
+          VStack {
+            SliderText(text: "Red")
+            HStack {
+              Slider(value: $redColor, in: 0...255)
+                .accentColor(.red)
+                .frame(maxWidth: Constants.General.sliderValueWidth)
+              Text("\(Int(redColor.rounded()))")
+                .frame(maxWidth: Constants.General.sliderNumberWidth)
+            }
+          }
+          VStack {
+            SliderText(text: "Green")
+            HStack {
+              Slider(value: $greenColor, in: 0...255)
+                .accentColor(.green)
+                .frame(maxWidth: Constants.General.sliderValueWidth)
+              Text("\(Int(greenColor.rounded()))")
+                .frame(maxWidth: Constants.General.sliderNumberWidth)
+            }
+          }
+          VStack {
+            SliderText(text: "Blue")
+            HStack {
+              Slider(value: $blueColor, in: 0...255)
+                .accentColor(.blue)
+                .frame(maxWidth: Constants.General.sliderValueWidth)
+              Text("\(Int(blueColor.rounded()))")
+                .frame(maxWidth: Constants.General.sliderNumberWidth)
+            }
+          }
+          Button("Set Color") {
+            foregroundColor = Color(red: redColor / Constants.General.colorRGB, green: greenColor / Constants.General.colorRGB, blue: blueColor / Constants.General.colorRGB)
+          }
+          .padding(Constants.General.padding)
+          .background(
+            ZStack {
+              Color("ButtonColor")
+            }
+          )
+          .overlay(
+            RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
+              .strokeBorder(Color.white, lineWidth: 3)
+          )
+          .cornerRadius(Constants.General.cornerRadius)
+          .foregroundColor(.white)
         }
+        .ignoresSafeArea()
+        .padding(Constants.General.padding)
       }
-      VStack {
-        SliderText(text: "Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-            .accentColor(.blue)
-            .frame(maxWidth: Constants.General.sliderValueWidth)
-          Text("\(Int(blueColor.rounded()))")
-            .frame(maxWidth: Constants.General.sliderNumberWidth)
+    } else {
+      HStack {
+        VStack {
+          TitleText(text: "Color Picker")
+          RoundedRectangle(cornerRadius: 0)
+            .foregroundColor(foregroundColor)
+            .border(Color("BorderColor"), width: 10)
+            .frame(width: 300, height: 250)
         }
-      }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / Constants.General.colorRGB, green: greenColor / Constants.General.colorRGB, blue: blueColor / Constants.General.colorRGB)
-      }
-      .padding(Constants.General.padding)
-      .background(
-        ZStack {
-          Color("ButtonColor")
+        VStack {
+          VStack {
+            SliderText(text: "Red")
+            HStack {
+              Slider(value: $redColor, in: 0...255)
+                .accentColor(.red)
+                .frame(maxWidth: Constants.General.sliderValueWidth)
+              Text("\(Int(redColor.rounded()))")
+                .frame(maxWidth: Constants.General.sliderNumberWidth)
+            }
+          }
+          VStack {
+            VStack {
+              SliderText(text: "Green")
+              HStack {
+                Slider(value: $greenColor, in: 0...255)
+                  .accentColor(.green)
+                  .frame(maxWidth: Constants.General.sliderValueWidth)
+                Text("\(Int(greenColor.rounded()))")
+                  .frame(maxWidth: Constants.General.sliderNumberWidth)
+              }
+            }
+            VStack {
+              SliderText(text: "Blue")
+              HStack {
+                Slider(value: $blueColor, in: 0...255)
+                  .accentColor(.blue)
+                  .frame(maxWidth: Constants.General.sliderValueWidth)
+                Text("\(Int(blueColor.rounded()))")
+                  .frame(maxWidth: Constants.General.sliderNumberWidth)
+              }
+            }
+            Button("Set Color") {
+              foregroundColor = Color(red: redColor / Constants.General.colorRGB, green: greenColor / Constants.General.colorRGB, blue: blueColor / Constants.General.colorRGB)
+            }
+            .padding(Constants.General.padding)
+            .background(
+              ZStack {
+                Color("ButtonColor")
+              }
+            )
+            .overlay(
+              RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
+                .strokeBorder(Color.white, lineWidth: 3)
+            )
+            .cornerRadius(Constants.General.cornerRadius)
+            .foregroundColor(.white)
+          }
         }
-      )
-      .overlay(
-        RoundedRectangle(cornerRadius: Constants.General.cornerRadius)
-          .strokeBorder(Color.white, lineWidth: 3)
-      )
-      .cornerRadius(Constants.General.cornerRadius)
-      .foregroundColor(.white)
+        .ignoresSafeArea()
+        .padding(Constants.General.padding)
+      }
     }
-    .ignoresSafeArea()
-    .padding(Constants.General.padding)
-    
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
 
+struct ContentView_Previews: PreviewProvider {
+  
   static var previews: some View {
     ContentView()
+      .previewInterfaceOrientation(.portrait)
     ContentView()
-      .previewInterfaceOrientation(.landscapeRight)
+      .previewInterfaceOrientation(.landscapeLeft)
       .preferredColorScheme(.dark)
   }
 }
