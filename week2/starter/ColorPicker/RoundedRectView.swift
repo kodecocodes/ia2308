@@ -32,23 +32,27 @@
 
 import SwiftUI
 
-struct RoundedRectView: View {
+struct RoundedRectViewPortrait: View {
   var body: some View {
     RoundedRectangle(cornerRadius: 0)
-      .foregroundColor(.black)
       .border(Color("BorderColor"), width: 10)
-      .background(Color("BackgroundColor"))
       .frame(width: 350, height: 350)
-      .ignoresSafeArea()
-      .padding(Constants.General.padding)
+  }
+}
+
+struct RoundedRectViewLandScape: View {
+  var body: some View {
+    RoundedRectangle(cornerRadius: 0)
+      .border(Color("BorderColor"), width: 10)
+      .frame(width: 350, height: 250)
   }
 }
 
 struct RoundedRectView_Previews: PreviewProvider {
   static var previews: some View {
-    RoundedRectView()
-    RoundedRectView()
-      .preferredColorScheme(.light)
+    RoundedRectViewPortrait()
+    RoundedRectViewLandScape()
+      .preferredColorScheme(.dark)
       .previewInterfaceOrientation(.landscapeRight)
   }
 }

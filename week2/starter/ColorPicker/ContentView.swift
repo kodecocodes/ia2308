@@ -51,10 +51,8 @@ struct ContentView: View {
       VStack {
         VStack {
           TitleText(text: "Color Picker")
-          RoundedRectangle(cornerRadius: 0)
+          RoundedRectViewPortrait()
             .foregroundColor(foregroundColor)
-            .border(Color("BorderColor"), width: 10)
-            .frame(width: 350, height: 350)
         }
         VStack {
           VStack {
@@ -110,10 +108,8 @@ struct ContentView: View {
       HStack {
         VStack {
           TitleText(text: "Color Picker")
-          RoundedRectangle(cornerRadius: 0)
+          RoundedRectViewLandScape()
             .foregroundColor(foregroundColor)
-            .border(Color("BorderColor"), width: 10)
-            .frame(width: 300, height: 250)
         }
         VStack {
           VStack {

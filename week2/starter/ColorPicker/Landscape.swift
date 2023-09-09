@@ -32,6 +32,7 @@
 
 import SwiftUI
 
+// Testing Landscape
 struct Landscape: View {
   
   @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -40,28 +41,30 @@ struct Landscape: View {
   var isLandscape: Bool {
     verticalSizeClass == .regular && horizontalSizeClass == .compact
   }
-    var body: some View {
-      if isLandscape {
-        VStack {
-          Circle()
-            .fill(Color.red)
-          Circle()
-            .fill(Color.green)
-        }
-      } else {
-          HStack {
-            Circle()
-              .fill(Color.red)
-            Circle()
-              .fill(Color.green)
-        }
+  var body: some View {
+    if isLandscape {
+      VStack {
+        Circle()
+          .fill(Color.red)
+        Circle()
+          .fill(Color.green)
+      }
+    } else {
+      HStack {
+        Circle()
+          .fill(Color.red)
+        Circle()
+          .fill(Color.green)
       }
     }
+  }
 }
 
 struct Landscape_Previews: PreviewProvider {
-    static var previews: some View {
-        Landscape()
-    
-    }
+  static var previews: some View {
+    Landscape()
+    Landscape()
+      .previewInterfaceOrientation(.landscapeRight)
+
+  }
 }

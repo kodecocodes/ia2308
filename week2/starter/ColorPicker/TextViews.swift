@@ -50,6 +50,15 @@ struct SliderText: View {
   }
 }
 
+struct SliderNumberText: View {
+  var text: String
+  
+  var body: some View {
+    Text(text)
+  }
+  
+}
+
 struct ButtonText: View {
   var text: String
   
