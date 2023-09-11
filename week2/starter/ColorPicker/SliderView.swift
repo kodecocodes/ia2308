@@ -28,6 +28,9 @@ struct SliderViewRed: View {
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
   
     var body: some View {
+      Text("Red")
+        .foregroundColor(Color("TextColor"))
+        .font(.headline)
       HStack {
         Slider(value: $redColor, in: 0...255)
           .tint(Color.red)
@@ -44,6 +47,9 @@ struct SliderViewGreen: View {
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
   
   var body: some View {
+    Text("Green")
+      .foregroundColor(Color("TextColor"))
+      .font(.headline)
     HStack {
       Slider(value: $greenColor, in: 0...255)
         .tint(Color.green)
@@ -60,6 +66,9 @@ struct SliderViewBlue: View {
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
   
   var body: some View {
+    Text("Blue")
+      .foregroundColor(Color("TextColor"))
+      .font(.headline)
     HStack {
       Slider(value: $blueColor, in: 0...255)
         .tint(Color.blue)
@@ -74,6 +83,7 @@ struct ButtonView: View {
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
+  
   var body: some View {
     Button("Set Color" .uppercased())
     {

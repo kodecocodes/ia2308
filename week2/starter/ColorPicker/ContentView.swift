@@ -16,23 +16,14 @@ struct ContentView: View {
       RectView()
         .padding()
       VStack {
-        Text("Red")
-          .foregroundColor(Color("TextColor"))
-          .font(.headline)
         SliderViewRed()
       }
       .padding()
       VStack {
-        Text("Green")
-          .foregroundColor(Color("TextColor"))
-          .font(.headline)
         SliderViewGreen()
       }
       .padding()
       VStack {
-        Text("Blue")
-          .foregroundColor(Color("TextColor"))
-          .font(.headline)
         SliderViewBlue()
       }
       .padding()
