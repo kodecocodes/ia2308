@@ -15,43 +15,60 @@ struct ContentView: View {
         .foregroundColor(Color("TextColor"))
 
       RoundedRectangle(cornerRadius: 0)
-        .fill(foregroundColor)
-        .overlay(
-              RoundedRectangle(cornerRadius: 0)
-                  .stroke(foregroundColor, lineWidth: 15)
-                  .opacity(0.5)
-          )
+        .foregroundColor(foregroundColor)
+        .overlay(RoundedRectangle(cornerRadius: 0)
+                          .stroke(foregroundColor, lineWidth: 10)
+                          .opacity(0.5))
+      
+        .padding()
       
       VStack {
         Text("Red")
           .foregroundColor(Color("TextColor"))
+          .font(.headline)
         HStack {
           Slider(value: $redColor, in: 0...255)
+            .tint(Color.red)
           Text("\(Int(redColor.rounded()))")
         }
       }
+      
       .padding()
+      
       VStack {
         Text("Green")
           .foregroundColor(Color("TextColor"))
+          .font(.headline)
         HStack {
           Slider(value: $greenColor, in: 0...255)
+            .tint(Color.green)
           Text("\(Int(greenColor.rounded()))")
         }
       }
+      
       .padding()
+      
       VStack {
         Text("Blue")
           .foregroundColor(Color("TextColor"))
+          .font(.headline)
         HStack {
           Slider(value: $blueColor, in: 0...255)
+            .tint(Color.blue)
           Text("\(Int(blueColor.rounded()))")
         }
       }
+      
       .padding()
-      Button("Set Color") {
+      
+      Button("Set Color" .uppercased())
+        {
         foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
       }
+        .padding(20)
+        .background(Color(.blue))
+        .foregroundColor(.white)
+        .cornerRadius(21.0)
     }
     .padding(20)
 
