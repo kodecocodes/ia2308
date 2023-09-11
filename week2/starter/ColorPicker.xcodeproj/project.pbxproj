@@ -12,8 +12,8 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
-		AA5939622AAFDB4500DA9A22 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5939612AAFDB4500DA9A22 /* ButtonView.swift */; };
-		AA5939682AAFDBA100DA9A22 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5939672AAFDBA100DA9A22 /* Constants.swift */; };
+		AA59396A2AAFE03B00DA9A22 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5939692AAFE03B00DA9A22 /* ButtonView.swift */; };
+		AA59396C2AAFE05C00DA9A22 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA59396B2AAFE05C00DA9A22 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +24,8 @@
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		AA5939612AAFDB4500DA9A22 /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonView.swift; path = ../../../../../KODECO/ColorPicker/ColorPicker/ButtonView.swift; sourceTree = "<group>"; };
-		AA5939672AAFDBA100DA9A22 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AA5939692AAFE03B00DA9A22 /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		AA59396B2AAFE05C00DA9A22 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +62,8 @@
 			children = (
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
-				AA5939672AAFDBA100DA9A22 /* Constants.swift */,
-				AA5939612AAFDB4500DA9A22 /* ButtonView.swift */,
+				AA5939692AAFE03B00DA9A22 /* ButtonView.swift */,
+				AA59396B2AAFE05C00DA9A22 /* Constants.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775CE22AD944400AE281E /* Info.plist */,
@@ -177,8 +177,8 @@
 			files = (
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
-				AA5939622AAFDB4500DA9A22 /* ButtonView.swift in Sources */,
-				AA5939682AAFDBA100DA9A22 /* Constants.swift in Sources */,
+				AA59396A2AAFE03B00DA9A22 /* ButtonView.swift in Sources */,
+				AA59396C2AAFE05C00DA9A22 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
