@@ -14,64 +14,32 @@ struct ContentView: View {
         .font(.largeTitle)
         .foregroundColor(Color("TextColor"))
 
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .overlay(RoundedRectangle(cornerRadius: 0)
-                          .stroke(foregroundColor, lineWidth: 10)
-                          .opacity(0.5))
-      
+      RectView()
         .padding()
-      
       VStack {
         Text("Red")
           .foregroundColor(Color("TextColor"))
           .font(.headline)
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-            .tint(Color.red)
-          Text("\(Int(redColor.rounded()))")
-        }
+        SliderViewRed()
       }
-      
       .padding()
-      
       VStack {
         Text("Green")
           .foregroundColor(Color("TextColor"))
           .font(.headline)
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-            .tint(Color.green)
-          Text("\(Int(greenColor.rounded()))")
-        }
+        SliderViewGreen()
       }
-      
       .padding()
-      
       VStack {
         Text("Blue")
           .foregroundColor(Color("TextColor"))
           .font(.headline)
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-            .tint(Color.blue)
-          Text("\(Int(blueColor.rounded()))")
-        }
+        SliderViewBlue()
       }
-      
       .padding()
-      
-      Button("Set Color" .uppercased())
-        {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
-      }
-        .padding(20)
-        .background(Color(.blue))
-        .foregroundColor(.white)
-        .cornerRadius(21.0)
+      ButtonView()
     }
     .padding(20)
-
   }
 }
 
@@ -81,6 +49,5 @@ struct ContentView_Previews: PreviewProvider {
     ContentView()
       .preferredColorScheme(.dark)
       .previewDevice("Iphone 14 Pro Max")
-      
   }
 }
