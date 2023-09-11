@@ -13,7 +13,6 @@ struct ContentView: View {
       Text("Color Picker")
         .font(.largeTitle)
         .foregroundColor(Color("TextColor"))
-
       RectView()
         .padding()
       VStack {
