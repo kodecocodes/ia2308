@@ -49,9 +49,9 @@ struct VertiView: View {
       ColorPreviewView(color: $foregroundColor)
         .padding()
       
-      ColorSliderView(colorValue: $redColor, label: "Rojo", accentColor: .red)
-      ColorSliderView(colorValue: $greenColor, label: "Verde", accentColor: .green)
-      ColorSliderView(colorValue: $blueColor, label: "Azul", accentColor: .blue)
+      ColorSliderView(colorValue: $redColor, label: "Red", accentColor: .red)
+      ColorSliderView(colorValue: $greenColor, label: "Green", accentColor: .green)
+      ColorSliderView(colorValue: $blueColor, label: "Blue", accentColor: .blue)
       
       Button("Set Color") {
         foregroundColor = Color(red: redColor / Constants.General.maxValue,
@@ -90,9 +90,9 @@ struct HoriView: View {
           .padding()
       }
       VStack {
-        ColorSliderView(colorValue: $redColor, label: "Rojo", accentColor: .red)
-        ColorSliderView(colorValue: $greenColor, label: "Verde", accentColor: .green)
-        ColorSliderView(colorValue: $blueColor, label: "Azul", accentColor: .blue)
+        ColorSliderView(colorValue: $redColor, label: "Red", accentColor: .red)
+        ColorSliderView(colorValue: $greenColor, label: "Green", accentColor: .green)
+        ColorSliderView(colorValue: $blueColor, label: "Blue", accentColor: .blue)
         
         Button("Set Color") {
           foregroundColor = Color(red: redColor / Constants.General.maxValue,
