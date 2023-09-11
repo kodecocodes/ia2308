@@ -16,9 +16,11 @@ struct ContentView: View {
 
       RoundedRectangle(cornerRadius: 0)
         .fill(foregroundColor)
-        .border(foregroundColor)
-        .padding(.leading)
-        .padding(.trailing)
+        .overlay(
+              RoundedRectangle(cornerRadius: 0)
+                  .stroke(foregroundColor, lineWidth: 15)
+                  .opacity(0.5)
+          )
       
       VStack {
         Text("Red")
