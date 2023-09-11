@@ -32,50 +32,94 @@
 
 import SwiftUI
 
+extension CGFloat {
+  static let standardSpacing = 16.0
+  static let smallSpacing = 4.0
+  static let standardPadding = 16.0
+}
+
 struct ContentView: View {
-  @State private var alertIsVisible: Bool = false
+  @Environment(\.verticalSizeClass) var verticalSizeClass
+  
   @State private var redColor: Double = 0.0
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  @State private var showForegroundShadow = false
+  
   var body: some View {
-
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(.black)
-      VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-          Text("\(Int(redColor.rounded()))")
+    Group {
+      if verticalSizeClass == .regular {
+        VStack(spacing: .standardSpacing) {
+          titleView
+          colorSquare
+          ColorSliderView(colorValue: $redColor, color: .red)
+          ColorSliderView(colorValue: $greenColor, color: .green)
+          ColorSliderView(colorValue: $blueColor, color: .blue)
+          setColorButton
         }
-      }
-      VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-          Text("\(Int(greenColor.rounded()))")
+      } else {
+        HStack(spacing: .standardSpacing) {
+          VStack(spacing: .standardSpacing) {
+            titleView
+            colorSquare
+          }
+          
+          VStack(spacing: .standardSpacing) {
+            ColorSliderView(colorValue: $redColor, color: .red)
+            ColorSliderView(colorValue: $greenColor, color: .green)
+            ColorSliderView(colorValue: $blueColor, color: .blue)
+            setColorButton
+          }
         }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-          Text("\(Int(blueColor.rounded()))")
-        }
-      }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
       }
     }
-    .background(Color.white)
-    .padding(20)
+    .background(Color(.systemBackground).ignoresSafeArea())
+    .padding(.standardPadding)
+  }
+}
 
+// MARK: - Views
+
+extension ContentView {
+  private var titleView: some View {
+    Text("Color Picker")
+      .font(.largeTitle)
+      .fontWeight(.semibold)
+  }
+  
+  private var colorSquare: some View {
+    RoundedRectangle(cornerRadius: .zero)
+      .fill(foregroundColor)
+      .overlay(
+        RoundedRectangle(cornerRadius: .zero)
+          .strokeBorder(Color(.systemBackground).opacity(0.25), lineWidth: showForegroundShadow ? 8 : 0)
+      )
+      .overlay {
+        RoundedRectangle(cornerRadius: .zero)
+          .stroke(Color.primary, lineWidth: 1)
+      }
+  }
+  
+  private var setColorButton: some View {
+    Button { setColor() } label: {
+      Text("Set Color")
+        .font(.caption)
+        .fontWeight(.semibold)
+        .foregroundColor(.white)
+    }
+    .buttonStyle(ColorButtonStyle())
+  }
+}
+
+// MARK: - Helper functions
+
+extension ContentView {
+  private func setColor() {
+    withAnimation {
+      foregroundColor = .rgb(r: redColor, g: greenColor, b: blueColor)
+      showForegroundShadow = true
+    }
   }
 }
 
