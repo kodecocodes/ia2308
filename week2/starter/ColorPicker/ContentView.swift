@@ -38,20 +38,25 @@ struct ContentView: View {
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  
   var body: some View {
-
+    
     VStack {
       Text("Color Picker")
         .font(.largeTitle)
-
+        .bold()
+      
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
-        .border(.black)
+        .frame(width: Constants.General.frameWidth, height: Constants.General.frameHeight)
+        .border(.opacity(Constants.General.borderOpacity), width: Constants.General.borderWidth)
+        .padding()
+      
       VStack {
         Text("Red")
         HStack {
           Slider(value: $redColor, in: 0...255)
+            .accentColor(.red)
           Text("\(Int(redColor.rounded()))")
         }
       }
@@ -59,6 +64,7 @@ struct ContentView: View {
         Text("Green")
         HStack {
           Slider(value: $greenColor, in: 0...255)
+            .accentColor(.green)
           Text("\(Int(greenColor.rounded()))")
         }
       }
@@ -66,16 +72,16 @@ struct ContentView: View {
         Text("Blue")
         HStack {
           Slider(value: $blueColor, in: 0...255)
+            .accentColor(.blue)
           Text("\(Int(blueColor.rounded()))")
         }
       }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
-      }
+      
+      ButtonView(colorFill: $foregroundColor, redValue: $redColor, greenValue: $greenColor, blueValue: $blueColor)
     }
-    .background(Color.white)
+    .background(Color.clear)
     .padding(20)
-
+    
   }
 }
 
