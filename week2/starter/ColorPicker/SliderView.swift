@@ -94,9 +94,12 @@ struct ButtonView: View {
     .foregroundColor(.white)
     .cornerRadius(21.0)
   }
+}
+
   
-  struct SliderView_Previews: PreviewProvider {
-    static var previews: some View {
+struct SliderView_Previews: PreviewProvider {
+  static var previews: some View {
+    VStack {
       RectView()
       SliderViewRed()
       SliderViewGreen()

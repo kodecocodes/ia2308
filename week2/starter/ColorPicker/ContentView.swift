@@ -15,6 +15,7 @@ struct ContentView: View {
         .foregroundColor(Color("TextColor"))
       RectView()
         .padding()
+      }
       VStack {
         SliderViewRed()
       }
@@ -29,13 +30,21 @@ struct ContentView: View {
       .padding()
       ButtonView()
     }
-    .padding(20)
-  }
-}
+    }
+    
+
+
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+    VStack {
+      RectView()
+      SliderViewRed()
+      SliderViewGreen()
+      SliderViewBlue()
+      ButtonView()
+    }
     ContentView()
       .preferredColorScheme(.dark)
       .previewDevice("Iphone 14 Pro Max")
