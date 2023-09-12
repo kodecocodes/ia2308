@@ -19,6 +19,8 @@ struct ColorSliderView: View {
   
 }
 
+
+
 struct ButtonView: View {
   @Binding var foregroudColor: Color
   @Binding var redValue: Double

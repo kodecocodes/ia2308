@@ -48,7 +48,9 @@ struct ContentView: View {
       
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
-        .border(.black)
+        .border(.orange)
+        .padding(20)
+      
       VStack {
         
         ColorSliderView(value: $redColor, label: "Red", color: .red)
@@ -66,8 +68,7 @@ struct ContentView: View {
       
     }
     
-    .background(colorScheme == .dark ? Color.black : Color.white)
-    
+    .background(Color("BackgroudColor"))
     .padding(20)
     
   }
