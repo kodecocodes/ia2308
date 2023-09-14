@@ -32,6 +32,23 @@
 
 import SwiftUI
 
+enum SliderColors {
+  case red
+  case green
+  case blue
+  
+  var color: Color {
+    switch self {
+    case .red:
+      return Color.red
+    case .green:
+      return Color.green
+    case .blue:
+      return Color.blue
+    }
+  }
+}
+
 struct TitleTextView: View {
   var text: String
   var body: some View{
@@ -45,7 +62,7 @@ struct RectangleView: View{
   var width: CGFloat
   var frameWidth: CGFloat
   var borderColor: Color
-  @Binding var foregroundColor: Color
+  var foregroundColor: Color
   
   var body: some View{
     RoundedRectangle(cornerRadius: 0)
@@ -57,15 +74,15 @@ struct RectangleView: View{
 
 struct SliderView: View{
   var title: String
-  var accentColor: Color
+  var tintColor: SliderColors
   @Binding var colorValue: Double
   
   var body: some View{
     VStack {
-      Text(title)
+      Text("\(title): \(Int(colorValue))")
       HStack {
         Slider(value: $colorValue, in: 0...DrawingConstants.colorRangeValue)
-          .accentColor(accentColor)
+          .tint(tintColor.color)
         Text("\(Int(DrawingConstants.colorRangeValue))")
       }
     }
@@ -75,9 +92,9 @@ struct SliderView: View{
 struct SetColorButton: View{
   var text: String
   @Binding var foregroundColor: Color
-  @Binding var redColor: Double
-  @Binding var greenColor: Double
-  @Binding var blueColor: Double
+  var redColor: Double
+  var greenColor: Double
+  var blueColor: Double
   
   var body: some View{
     Button(text){
@@ -95,6 +112,19 @@ enum DrawingConstants {
   static let landscapeModeRecatngleScale = 0.8
   
 }
+
+struct ThreeSlidersView: View{
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  
+  var body: some View{
+    SliderView(title: "Red", tintColor: .red, colorValue: $redColor)
+    SliderView(title: "Green", tintColor: .green, colorValue: $greenColor)
+    SliderView(title: "Blue", tintColor: .blue, colorValue: $blueColor)
+  }
+}
+
 
 struct ContentView: View {
   
@@ -115,49 +145,47 @@ struct ContentView: View {
     return Color(uiColor)
   }
   
-  var body: some View {
-
-    Group {
-      ZStack {
-        GeometryReader { geometry in
-          Color("BackgroundColor")
-            .ignoresSafeArea()
-          if isLandScape{
-            
-            VStack {
-              TitleTextView(text: titleText)
-              HStack{
-                RectangleView(height : geometry.size.height * DrawingConstants.landscapeModeRecatngleScale, width: geometry.size.height * DrawingConstants.landscapeModeRecatngleScale, frameWidth: DrawingConstants.frameWidth, borderColor: borderColor, foregroundColor: $foregroundColor)
-                VStack {
-                  SliderView(title: "Red", accentColor: .red, colorValue: $redColor)
-                  SliderView(title: "Green", accentColor: .green, colorValue: $greenColor)
-                  SliderView(title: "Blue", accentColor: .blue, colorValue: $blueColor)
-                  SetColorButton(text: "Set Color", foregroundColor: $foregroundColor, redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
-                }
-              }
-              
-            }
-          }else{
-            
-            VStack {
-              
-              TitleTextView(text: titleText)
-              
-              RectangleView(height : geometry.size.width, width: geometry.size.width, frameWidth: DrawingConstants.frameWidth, borderColor: borderColor, foregroundColor: $foregroundColor)
-              
-              
-              SliderView(title: "Red", accentColor: .red, colorValue: $redColor)
-              SliderView(title: "Green", accentColor: .green, colorValue: $greenColor)
-              SliderView(title: "Blue", accentColor: .blue, colorValue: $blueColor)
-              
-              SetColorButton(text: "Set Color", foregroundColor: $foregroundColor, redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
-              
-            }
-          }
+  var landscameView: some View {
+    VStack {
+      TitleTextView(text: titleText)
+      HStack{
+        RectangleView(height : 300, width: 300, frameWidth: DrawingConstants.frameWidth, borderColor: borderColor, foregroundColor: foregroundColor)
+        VStack {
+          ThreeSlidersView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
+          SetColorButton(text: "Set Color", foregroundColor: $foregroundColor, redColor: redColor, greenColor: greenColor, blueColor: blueColor)
         }
       }
     }
-    .padding(DrawingConstants.outerGroupPadding)
+  }
+  
+  var portraitView: some View {
+    VStack {
+      
+      TitleTextView(text: titleText)
+      
+      RectangleView(height : 300, width: 300, frameWidth: DrawingConstants.frameWidth, borderColor: borderColor, foregroundColor: foregroundColor)
+      
+      ThreeSlidersView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
+      
+      SetColorButton(text: "Set Color", foregroundColor: $foregroundColor, redColor: redColor, greenColor: greenColor, blueColor: blueColor)
+    }
+  }
+  
+  
+  var body: some View {
+    
+    ZStack {
+      Color("BackgroundColor")
+        .ignoresSafeArea()
+      Group{
+        if isLandScape{
+          landscameView
+        }else{
+          portraitView
+        }
+      }
+      .padding()
+    }
   }
 }
 
@@ -198,7 +226,6 @@ extension UIColor {
     )
   }
 }
-
 extension UIColor {
   // Add value to component ensuring the result is
   // between 0 and 1
