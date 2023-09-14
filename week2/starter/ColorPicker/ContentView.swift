@@ -32,16 +32,20 @@
 
 import SwiftUI
 
+enum Constants {
+    static let maxColorValue: Double = 255.0
+}
+
 struct ContentView: View {
-  @State private var redColor: Double = 250.0
-  @State private var greenColor: Double = 100.0
-  @State private var blueColor: Double = 50.0
-  @State private var foregroundColor = Color(red: 250.0/255.0, green: 100.0/255.0, blue: 50.0/255.0)
+  @State private var redColor: Double = Constants.maxColorValue
+  @State private var greenColor: Double = Constants.maxColorValue
+  @State private var blueColor: Double = Constants.maxColorValue
+  @State private var foregroundColor = Color(red: 250.0/Constants.maxColorValue, green: 100.0/Constants.maxColorValue, blue: 50.0/Constants.maxColorValue)
   
   private func getColor() -> Color {
-    let redPercentage = redColor / 255.0
-    let greenPercentage = greenColor / 255.0
-    let bluePercentage = blueColor / 255.0
+    let redPercentage = redColor / Constants.maxColorValue
+    let greenPercentage = greenColor / Constants.maxColorValue
+    let bluePercentage = blueColor / Constants.maxColorValue
     return Color(red: redPercentage, green: greenPercentage, blue: bluePercentage)
   }
   
