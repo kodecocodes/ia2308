@@ -33,54 +33,87 @@
 import SwiftUI
 
 struct ContentView: View {
+  
   @State private var alertIsVisible: Bool = false
-  @State private var redColor: Double = 0.0
-  @State private var greenColor: Double = 0.0
-  @State private var blueColor: Double = 0.0
-  @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  @State private var redColor: Double = Constants.General.defaultSliderValue
+  @State private var greenColor: Double = Constants.General.defaultSliderValue
+  @State private var blueColor: Double = Constants.General.defaultSliderValue
+  @State private var foregroundColor: Color = Color(red: Constants.General.defaultSliderValue/Constants.General.maxColorRange, green: Constants.General.defaultSliderValue/Constants.General.maxColorRange, blue: Constants.General.defaultSliderValue/Constants.General.maxColorRange)
+  
   var body: some View {
-
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(.black)
+    
+    ZStack {
+      Color("BackgroundColor")
       VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-          Text("\(Int(redColor.rounded()))")
+        TextTitle(textTitle: "Color Picker")
+          .font(.largeTitle)
+          .bold()
+        
+        Rectangle()
+          .foregroundColor(foregroundColor)
+          .border(.orange, width: Constants.General.roundedRectWidth)
+        
+        VStack {
+          TextTitle(textTitle: "Red")
+          SliderView(sliderValue: $redColor, accentColor: .red, currentSliderValue: "\(Int(redColor.rounded()))")
         }
-      }
-      VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-          Text("\(Int(greenColor.rounded()))")
+        VStack {
+          TextTitle(textTitle: "Green")
+          SliderView(sliderValue: $greenColor, accentColor: .green, currentSliderValue: "\(Int(greenColor.rounded()))")
         }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-          Text("\(Int(blueColor.rounded()))")
+        VStack {
+          TextTitle(textTitle: "Blue")
+          SliderView(sliderValue: $blueColor, accentColor: .blue, currentSliderValue: "\(Int(blueColor.rounded()))")
         }
+        
+        SetColorButton(foregroundColor: $foregroundColor, redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
       }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
-      }
+      .padding(Constants.General.paddingValue)
     }
-    .background(Color.white)
-    .padding(20)
+  }
+}
 
+struct SliderView: View {
+  @Binding var sliderValue: Double
+  var accentColor: Color
+  var currentSliderValue: String
+  
+  var body: some View {
+    HStack {
+      Slider(value: $sliderValue, in: 0...Constants.General.maxColorRange)
+        .accentColor(accentColor)
+      Text(currentSliderValue)
+    }
+    
+  }
+}
+
+struct SetColorButton: View {
+  @Binding var foregroundColor: Color
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  
+  var body: some View {
+    Button(Constants.General.buttonTitle) {
+      foregroundColor = Color(red: redColor / Constants.General.maxColorRange, green: greenColor / Constants.General.maxColorRange, blue: blueColor / Constants.General.maxColorRange)
+    }
+    .padding(Constants.General.paddingValue)
+    .background(Color.blue)
+    .overlay(
+      RoundedRectangle(cornerRadius: Constants.General.buttonShapeCornerRadius)
+        .strokeBorder(Color.white, lineWidth: Constants.General.strokeWidth)
+    )
+    .foregroundColor(.white)
+    .cornerRadius(Constants.General.buttonShapeCornerRadius)
+    .font(.title3)
+    .bold()
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
+    ContentView()
     ContentView()
   }
 }
