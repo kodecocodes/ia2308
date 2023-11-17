@@ -32,50 +32,65 @@
 
 import SwiftUI
 
+enum Constants {
+    static let maxColorValue: Double = 255.0
+}
+
 struct ContentView: View {
-  @State private var alertIsVisible: Bool = false
-  @State private var redColor: Double = 0.0
-  @State private var greenColor: Double = 0.0
-  @State private var blueColor: Double = 0.0
-  @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-
+  @State private var redColor: Double = Constants.maxColorValue
+  @State private var greenColor: Double = Constants.maxColorValue
+  @State private var blueColor: Double = Constants.maxColorValue
+  @State private var foregroundColor = Color(red: 250.0/Constants.maxColorValue, green: 100.0/Constants.maxColorValue, blue: 50.0/Constants.maxColorValue)
+  
+  private func getColor() -> Color {
+    let redPercentage = redColor / Constants.maxColorValue
+    let greenPercentage = greenColor / Constants.maxColorValue
+    let bluePercentage = blueColor / Constants.maxColorValue
+    return Color(red: redPercentage, green: greenPercentage, blue: bluePercentage)
+  }
+  
   var body: some View {
-
-    VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(.black)
-      VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-          Text("\(Int(redColor.rounded()))")
+    GeometryReader { geometry in
+      ScrollView {
+        HStack{
+          VStack {
+            VStack {
+              Text("Color Picker")
+                .font(.largeTitle)
+                .foregroundColor(.primary)
+              
+              VStack {
+                RoundedRectangle(cornerRadius: 0)
+                  .foregroundColor(getColor())
+                  .border(Color.black.opacity(0.3), width: 5)
+                  .background(Color.white)
+                  .padding(20)
+                  .frame(width: geometry.size.width - 20, height: geometry.size.height / (geometry.size.width > geometry.size.height ? 4 : 2))
+                
+                VStack {
+                  ColorSliderView(colorValue: $redColor, colorName: "Red", foregroundColor: $foregroundColor)
+                    .accentColor(.red)
+                  ColorSliderView(colorValue: $greenColor, colorName: "Green", foregroundColor: $foregroundColor)
+                    .accentColor(.green)
+                  ColorSliderView(colorValue: $blueColor, colorName: "Blue", foregroundColor: $foregroundColor)
+                    .accentColor(.blue)
+                  
+                }
+                .frame(width: geometry.size.width - 30)
+                
+                CustomButtonView(foregroundColor: $foregroundColor, redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor)
+                Spacer()
+              }
+              Spacer()
+                .padding(20)
+              
+            }
+            .background(Color.clear)
+            .padding(20)
+          }
         }
-      }
-      VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-          Text("\(Int(greenColor.rounded()))")
-        }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-          Text("\(Int(blueColor.rounded()))")
-        }
-      }
-      Button("Set Color") {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
       }
     }
-    .background(Color.white)
-    .padding(20)
-
   }
 }
 
@@ -84,3 +99,6 @@ struct ContentView_Previews: PreviewProvider {
     ContentView()
   }
 }
+
+
+
