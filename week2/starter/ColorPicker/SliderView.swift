@@ -2,59 +2,25 @@
 import SwiftUI  
   
 
-  struct SliderViewRed: View {
-    @Binding public var sliderValue: Double
-    
+struct ColorSliderView: View {
+    @Binding var value: Double
+    let label: String
+
+    private let labelTextSize: CGFloat = 18
+    private let valueLabelOffset: CGFloat = 5
+    private let colorScale: ClosedRange<Double> = 0...255
+
     var body: some View {
-      
-      Text("Red")
-        .foregroundColor(Color("TextColor"))
-        .font(.headline)
-      HStack {
-        Slider(value: $sliderValue, in: 0...255)
-          .tint(Color.red)
-        Text("\(Int(sliderValue.rounded()))")
-      }
+        VStack {
+            Text(label)
+                .font(.system(size: labelTextSize))
+
+            HStack {
+                Slider(value: $value, in: colorScale)
+
+                Text("\(Int(value.rounded()))")
+                    .offset(x: valueLabelOffset)
+            }
+        }
     }
-  }
-  
-  struct SliderViewGreen: View {
-    @Binding var sliderValue: Double
-    
-    var body: some View {
-      Text("Green")
-        .foregroundColor(Color("TextColor"))
-        .font(.headline)
-      HStack {
-        Slider(value: $sliderValue, in: 0...255)
-          .tint(Color.green)
-        Text("\(Int(sliderValue.rounded()))")
-      }
-    }
-  }
-  
-  struct SliderViewBlue: View {
-    @Binding var sliderValue: Double
-    
-    var body: some View {
-      Text("Blue")
-        .foregroundColor(Color("TextColor"))
-        .font(.headline)
-      HStack {
-        Slider(value: $sliderValue, in: 0...255)
-          .tint(Color.blue)
-        Text("\(Int(sliderValue.rounded()))")
-      }
-    }
-  }
-  
-  
-//  struct SliderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//      VStack {
-//        SliderViewRed()
-//        SliderViewGreen()
-//        SliderViewBlue()
-//      }
-//    }
-//  }
+}
